@@ -5,7 +5,12 @@ export let api = {
     return fetch(url).then((res) => res.json());
   },
 
-  getProducts(){
+  getRepos(user){
+    let url = `https://api.github.com/users/${user}/repos`;
+    return fetch(url).then((res) => res.json());
+  },
 
-  }
+  getIssues(repo){
+
+  },
 };

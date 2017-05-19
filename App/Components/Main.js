@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { api } from "../Utils/api";
-import ProductsList from "./ProductsList";
-import { View, Text, StyleSheet, TextInput, TouchableHighlight, ActivityIndicator } from "react-native";
+import User from "./User";
+import { View, Text, StyleSheet, TextInput, TouchableHighlight, ActivityIndicator, KeyboardAvoidingView } from "react-native";
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -75,7 +75,7 @@ export default class Main extends Component {
         } else {
           this.props.navigator.push({
             title: res.name || 'Select an Option',
-            component: ProductsList,
+            component: User,
             passProps: { userInfo: res }
           })
 
@@ -91,11 +91,11 @@ export default class Main extends Component {
 
   render() {
     let showErr = (
-      this.state.error ? <Text> {this.state.error} </Text> : <View></View>
+      this.state.error ? <Text> {this.state.error} </Text> : <View/>
     );
     return (
       <View style={styles.mainContainer}>
-        <Text style={styles.title}> Simple store Login</Text>
+        <Text style={styles.title}> Simple Github Client</Text>
         <TextInput
           style={styles.searchInput}
           value={this.state.username}
@@ -105,12 +105,12 @@ export default class Main extends Component {
           style={styles.button}
           onPress={this.handleSubmit.bind(this)}
           underlayColor="white">
-          <Text style={styles.buttonText}>LOGIN</Text>
+          <Text style={styles.buttonText}>Search</Text>
         </TouchableHighlight>
         <ActivityIndicator
           animating={this.state.isLoading}
           color="#111"
-          size="large" ></ActivityIndicator>
+          size="large" />
         {showErr}
       </View>
     )

@@ -26,7 +26,7 @@ export default class SimpleStoreReact extends Component {
     return (
       <NavigatorIOS
         initialRoute={{
-        title: 'Simple Store React',
+        title: 'Simple Github Client',
         component: Main
         }}
         style={styles.container}
