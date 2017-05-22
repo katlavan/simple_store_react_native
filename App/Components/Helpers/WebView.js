@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {StyleSheet, View, WebView} from "react-native";
+import {StyleSheet, View, WebView, ActivityIndicator} from "react-native";
 
 const styles = StyleSheet.create({
   container: {

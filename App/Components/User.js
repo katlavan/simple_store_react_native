@@ -1,8 +1,10 @@
 import React, {PureComponent} from "react";
-import {Image, StyleSheet, Text, TouchableHighlight, View} from "react-native";
+import {StyleSheet, Text, TouchableHighlight, View} from "react-native";
+import * as Animatable from "react-native-animatable";
 import {api} from "../Utils/api";
 import Profile from "./Profile";
 import Repositories from "./Repositories";
+import AnimationDemo from "./Animation";
 
 
 let styles = StyleSheet.create({
@@ -30,14 +32,6 @@ let styles = StyleSheet.create({
 });
 
 export default class User extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      userName: 'User',
-      repos: []
-    }
-  }
-
   getBackground(btn) {
     let obj = {
       flexDirection: 'row',
@@ -47,6 +41,10 @@ export default class User extends PureComponent {
     };
 
     switch (btn) {
+      case 0: {
+        obj.backgroundColor = '#fec514';
+        break;
+      }
       case 1: {
         obj.backgroundColor = '#478cfe';
         break;
@@ -81,17 +79,33 @@ export default class User extends PureComponent {
       })
   }
 
+  goToAnimations() {
+    this.props.navigator.push({
+      component: AnimationDemo
+    })
+  }
+
+  componentWillUnmount(){
+    console.log('Pizdec');
+  }
+
   render() {
+    const AnimatableTouchableHighlight = Animatable.createAnimatableComponent(TouchableHighlight);
+
     return (
       <View style={styles.container}>
-        <Image source={{uri: this.props.userInfo.avatar_url}} style={styles.image}/>
-        <Text style={styles.label}> User: {this.state.userName} </Text>
-        <TouchableHighlight style={this.getBackground(1) } onPress={this.goToUser.bind(this)} underlayColor='blue'>
-          <Text style={styles.text}> See profile</Text>
-        </TouchableHighlight>
-        <TouchableHighlight style={this.getBackground(2) } onPress={this.goToRepos.bind(this)} underlayColor='blue'>
+        <Animatable.Image animation="slideInDown" source={{uri: this.props.userInfo.avatar_url}} style={styles.image}/>
+        <AnimatableTouchableHighlight animation="slideInRight" style={this.getBackground(0)}  onPress={this.goToUser.bind(this)}>
+          <Text style={styles.text}> User: {this.props.userInfo.name} </Text>
+        </AnimatableTouchableHighlight>
+        <AnimatableTouchableHighlight animation="slideInLeft" style={this.getBackground(1) } onPress={this.goToAnimations.bind(this)}
+                            underlayColor='blue'>
+          <Text style={styles.text}>Animation Demo</Text>
+        </AnimatableTouchableHighlight>
+        <AnimatableTouchableHighlight animation="slideInUp" style={this.getBackground(2) } onPress={this.goToRepos.bind(this)}
+                            underlayColor='blue'>
           <Text style={styles.text}> Repositories</Text>
-        </TouchableHighlight>
+        </AnimatableTouchableHighlight>
       </View>
     )
   }

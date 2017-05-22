@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { api } from "../Utils/api";
+import React, {Component} from "react";
+import {api} from "../Utils/api";
 import User from "./User";
-import { View, Text, StyleSheet, TextInput, TouchableHighlight, ActivityIndicator, KeyboardAvoidingView } from "react-native";
+import {ActivityIndicator, StyleSheet, Text, TextInput, TouchableHighlight, View} from "react-native";
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -76,7 +76,7 @@ export default class Main extends Component {
           this.props.navigator.push({
             title: res.name || 'Select an Option',
             component: User,
-            passProps: { userInfo: res }
+            passProps: {userInfo: res}
           })
 
           this.setState({
@@ -110,7 +110,7 @@ export default class Main extends Component {
         <ActivityIndicator
           animating={this.state.isLoading}
           color="#111"
-          size="large" />
+          size="large"/>
         {showErr}
       </View>
     )
